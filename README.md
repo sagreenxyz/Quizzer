@@ -1,38 +1,35 @@
-# sv
+# AIQuizzer2
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+AIQuizzer2 is a SvelteKit-based application that provides a Quiz and Flashcard system.
 
-## Creating a project
+## Features
 
-If you're seeing this, you've probably already done this step. Congrats!
+- **Quiz Mode**: Answer multiple-choice questions and track your score.
+- **Flashcard Mode**: Flip through flashcards to learn and review.
 
-```bash
-# create a new project in the current directory
-npx sv create
+## Installation
 
-# create a new project in my-app
-npx sv create my-app
-```
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/<your-username>/AIQuizzer2.git
+   cd AIQuizzer2
+   ```
 
-## Developing
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
 
-```bash
-npm run dev
+## Project Structure
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+- `src/components`: Contains Svelte components for the Quiz and Flashcard system.
+- `static/data`: Stores JSON files for quiz questions and flashcards.
 
-## Building
+## License
 
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+This project is licensed under the MIT License.

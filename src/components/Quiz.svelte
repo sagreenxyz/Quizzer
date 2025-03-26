@@ -220,70 +220,68 @@
     }
 </style>
 
-<h1>Quiz Question</h1>
-
-{#if isChapterSelectionMode}
-    <ChapterSelection
-        {chapters}
-        bind:selectedChapter
-        startQuiz={startQuiz}
-    />
-{:else if isReviewMode}
-    <ReviewAnswers
-        {userAnswers}
-        {score}
-        {totalQuestionsAnswered}
-        calculatePercentage={calculatePercentage}
-        resetQuiz={resetQuiz}
-    />
-{:else}
-    <div>
-        <p><strong>Score:</strong> {score}/{totalQuestionsAnswered} ({calculatePercentage()}%)</p>
-
-        <ProgressBar
-            totalQuestionsAnswered={totalQuestionsAnswered}
-            totalQuestions={totalQuestions}
+<div>
+    {#if isChapterSelectionMode}
+        <ChapterSelection
+            {chapters}
+            bind:selectedChapter
+            startQuiz={startQuiz}
         />
+    {:else if isReviewMode}
+        <ReviewAnswers
+            {userAnswers}
+            {score}
+            {totalQuestionsAnswered}
+            calculatePercentage={calculatePercentage}
+            resetQuiz={resetQuiz}
+        />
+    {:else}
+        <div>
+            <p><strong>Score:</strong> {score}/{totalQuestionsAnswered} ({calculatePercentage()}%)</p>
 
-        {#if question}
-            <div>
-                <p class="question-text"><strong>Question:</strong> {question.question}</p>
-                <ul>
-                    {#each question.choices as choice, index}
-                        <li>
-                            <button
-                                on:click={() => checkAnswer(index)}
-                                disabled={selectedAnswer !== null}
-                                class:selected-correct={selectedAnswer !== null && index === parseInt(question.correct_answer)}
-                                class:selected-incorrect={selectedAnswer !== null && index === selectedAnswer && index !== parseInt(question.correct_answer)}
-                            >
-                                {choice}
+            <ProgressBar
+                totalQuestionsAnswered={totalQuestionsAnswered}
+                totalQuestions={totalQuestions}
+            />
+
+            {#if question}
+                <div>
+                    <p class="question-text"><strong>Question:</strong> {question.question}</p>
+                    <ul>
+                        {#each question.choices as choice, index}
+                            <li>
+                                <button
+                                    on:click={() => checkAnswer(index)}
+                                    disabled={selectedAnswer !== null}
+                                    class:selected-correct={selectedAnswer !== null && index === parseInt(question.correct_answer)}
+                                    class:selected-incorrect={selectedAnswer !== null && index === selectedAnswer && index !== parseInt(question.correct_answer)}
+                                >
+                                    {choice}
+                                </button>
+                            </li>
+                        {/each}
+                    </ul>
+                    {#if feedback}
+                        <div class="feedback-container">
+                            <p class="feedback {feedback === 'Correct!' ? 'correct' : 'incorrect'}">
+                                {feedback}
+                            </p>
+                        </div>
+                    {/if}
+                    {#if selectedAnswer !== null}
+                        <div class="explanation">
+                            <strong>Explanation:</strong> {question.explanation}
+                        </div>
+                        <div class="button-container">
+                            <button on:click={handleNext}>
+                                {isLastQuestionAnswered ? 'Review Your Answers' : 'Next Question'}
                             </button>
-                        </li>
-                    {/each}
-                </ul>
-                {#if feedback}
-                    <div class="feedback-container">
-                        <p class="feedback {feedback === 'Correct!' ? 'correct' : 'incorrect'}">
-                            {feedback}
-                        </p>
-                    </div>
-                {/if}
-                {#if selectedAnswer !== null}
-                    <div class="explanation">
-                        <strong>Explanation:</strong> {question.explanation}
-                    </div>
-                {/if}
-                {#if selectedAnswer !== null}
-                    <div class="button-container">
-                        <button on:click={handleNext}>
-                            {isLastQuestionAnswered ? 'Review Your Answers' : 'Next Question'}
-                        </button>
-                    </div>
-                {/if}
-            </div>
-        {:else}
-            <p>Loading question...</p>
-        {/if}
-    </div>
-{/if}
+                        </div>
+                    {/if}
+                </div>
+            {:else}
+                <p>Loading question...</p>
+            {/if}
+        </div>
+    {/if}
+</div>
