@@ -1,6 +1,7 @@
 [
     {
         "question": "What is the capital of France?",
+<<<<<<< HEAD
         "answer": "Paris",
         "chapters_id": 1
     },
@@ -13,5 +14,16 @@
         "question": "What is the largest planet in our solar system?",
         "answer": "Jupiter",
         "chapters_id": 2
+=======
+        "answer": "Paris"
+    },
+    {
+        "question": "What is 2 + 2?",
+        "answer": "4"
+    },
+    {
+        "question": "What is the largest planet in our solar system?",
+        "answer": "Jupiter"
+>>>>>>> 04e987a (Added flashcards)
     }
 ]

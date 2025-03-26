@@ -1,6 +1,7 @@
 <script>
     import { onMount } from 'svelte';
     import FlashCard from './FlashCard.svelte';
+<<<<<<< HEAD
     import ProgressBar from './ProgressBar.svelte';
     import ChapterSelection from './ChapterSelection.svelte';
 
@@ -20,11 +21,25 @@
             }
             flashcards = await response.json();
             chapters = [...new Set(flashcards.map(f => f.chapters_id).filter(chapter => chapter !== null))];
+=======
+
+    let flashcards = [];
+    let currentIndex = 0;
+
+    async function loadFlashcards() {
+        try {
+            const response = await fetch('/data/flashcards.json');
+            if (!response.ok) {
+                throw new Error(`Failed to fetch flashcards.json: ${response.status} ${response.statusText}`);
+            }
+            flashcards = await response.json();
+>>>>>>> 04e987a (Added flashcards)
         } catch (error) {
             console.error('Error loading flashcards:', error);
         }
     }
 
+<<<<<<< HEAD
     function startFlashcards() {
         isChapterSelectionMode = false;
         filterFlashcards();
@@ -52,12 +67,21 @@
         selectedChapterName = ''; // Clear the chapter name
         filteredFlashcards = []; // Clear the filtered flashcards
         currentIndex = 0; // Reset the current index
+=======
+    function nextFlashcard() {
+        currentIndex = (currentIndex + 1) % flashcards.length;
+    }
+
+    function previousFlashcard() {
+        currentIndex = (currentIndex - 1 + flashcards.length) % flashcards.length;
+>>>>>>> 04e987a (Added flashcards)
     }
 
     onMount(loadFlashcards);
 </script>
 
 <div class="flashcard-viewer">
+<<<<<<< HEAD
     {#if isChapterSelectionMode}
         <!-- Use ChapterSelection component -->
         <ChapterSelection
@@ -94,6 +118,19 @@
                 <button on:click={quitFlashcards}>Quit</button>
             </div>
         </div>
+=======
+    {#if flashcards.length > 0}
+        <FlashCard
+            question={flashcards[currentIndex].question}
+            answer={flashcards[currentIndex].answer}
+        />
+        <div class="navigation">
+            <button on:click={previousFlashcard}>Previous</button>
+            <button on:click={nextFlashcard}>Next</button>
+        </div>
+    {:else}
+        <p>Loading flashcards...</p>
+>>>>>>> 04e987a (Added flashcards)
     {/if}
 </div>
 
@@ -105,6 +142,7 @@
         margin-top: 20px;
     }
 
+<<<<<<< HEAD
     .flashcard-container {
         width: 50%; /* Match the width used in the Quiz app */
         margin: 0 auto;
@@ -116,6 +154,8 @@
         margin-bottom: 16px;
     }
 
+=======
+>>>>>>> 04e987a (Added flashcards)
     .navigation {
         margin-top: 16px;
     }
@@ -135,6 +175,7 @@
     .navigation button:hover {
         background-color: #0056b3;
     }
+<<<<<<< HEAD
 
     .quit-container {
         margin-top: 16px;
@@ -154,4 +195,6 @@
     .quit-container button:hover {
         background-color: #a71d2a;
     }
+=======
+>>>>>>> 04e987a (Added flashcards)
 </style>
