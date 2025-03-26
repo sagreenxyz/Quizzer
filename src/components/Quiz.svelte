@@ -202,6 +202,22 @@
     .feedback.incorrect {
         text-align: left;
     }
+
+    /* Add or modify the style for the question text */
+    .question-text {
+        font-size: 1.25rem; /* Slightly larger font size */
+        font-weight: bold; /* Optional: make it bold for emphasis */
+    }
+
+    button.selected-correct {
+        background-color: #28a745; /* Green for correct answer */
+        color: white;
+    }
+
+    button.selected-incorrect {
+        background-color: #dc3545; /* Red for incorrect answer */
+        color: white;
+    }
 </style>
 
 <h1>Quiz Question</h1>
@@ -231,11 +247,16 @@
 
         {#if question}
             <div>
-                <p><strong>Question:</strong> {question.question}</p>
+                <p class="question-text"><strong>Question:</strong> {question.question}</p>
                 <ul>
                     {#each question.choices as choice, index}
                         <li>
-                            <button on:click={() => checkAnswer(index)} disabled={selectedAnswer !== null}>
+                            <button
+                                on:click={() => checkAnswer(index)}
+                                disabled={selectedAnswer !== null}
+                                class:selected-correct={selectedAnswer !== null && index === parseInt(question.correct_answer)}
+                                class:selected-incorrect={selectedAnswer !== null && index === selectedAnswer && index !== parseInt(question.correct_answer)}
+                            >
                                 {choice}
                             </button>
                         </li>
