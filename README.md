@@ -5,17 +5,25 @@ AIQuizzer is a SvelteKit-based application that provides a Quiz and Flashcard sy
 ## Features
 
 - **Quiz Mode**:
+  - Navigate to `/quiz` to start the quiz application.
   - Select a chapter to start the quiz.
   - Answer multiple-choice questions with instant feedback.
   - Track your score, progress, and percentage of correct answers.
   - Review your answers at the end of the quiz.
   - Includes a "Quit" button to return to chapter selection.
+  - Includes a "Back to Main Menu" button to return to the main menu.
 
 - **Flashcard Mode**:
+  - Navigate to `/flashcards` to start the flashcards application.
   - Select a chapter to start reviewing flashcards.
   - Navigate through flashcards using "Previous" and "Next" buttons.
   - Track your progress through the flashcards.
   - Includes a "Quit" button to return to chapter selection.
+  - Includes a "Back to Main Menu" button to return to the main menu.
+
+- **Main Menu**:
+  - The main menu is accessible at `/`.
+  - Provides navigation buttons to access the Quiz and Flashcards applications.
 
 - **Chapter Selection**:
   - Unified `ChapterSelection` component used in both the Quiz and Flashcards apps.
@@ -64,6 +72,20 @@ AIQuizzer is a SvelteKit-based application that provides a Quiz and Flashcard sy
 - **`src/components/ProgressBar.svelte`**:
   - Displays a progress bar to track the user's progress through the quiz or flashcards.
 
+### Routes
+
+- **`/`**:
+  - The main menu of the application.
+  - Provides navigation buttons to access the Quiz and Flashcards applications.
+
+- **`/quiz`**:
+  - The route for the Quiz application.
+  - Renders the `Quiz.svelte` component.
+
+- **`/flashcards`**:
+  - The route for the Flashcards application.
+  - Renders the `FlashCardViewer.svelte` component.
+
 ### API Routes
 
 - **`src/routes/api/questions/+server.js`**:
@@ -84,21 +106,31 @@ AIQuizzer is a SvelteKit-based application that provides a Quiz and Flashcard sy
 
 ## Usage
 
+### Main Menu
+
+1. Open the app at `/`.
+2. Click "Go to Quiz" to navigate to the Quiz application.
+3. Click "Go to Flashcards" to navigate to the Flashcards application.
+
 ### Quiz App
 
-1. Select a chapter from the dropdown menu.
-2. Click "Start Quiz" to begin.
-3. Answer multiple-choice questions and receive feedback.
-4. View your progress, score, and percentage.
-5. Use the "Quit" button to return to chapter selection.
+1. Navigate to `/quiz`.
+2. Select a chapter from the dropdown menu.
+3. Click "Start" to begin the quiz.
+4. Answer multiple-choice questions and receive feedback.
+5. View your progress, score, and percentage.
+6. Use the "Quit" button to return to chapter selection.
+7. Use the "Back to Main Menu" button to return to the main menu.
 
 ### Flashcards App
 
-1. Select a chapter from the dropdown menu.
-2. Click "Start Flashcards" to begin.
-3. Navigate through flashcards using the "Previous" and "Next" buttons.
-4. View your progress through the flashcards.
-5. Use the "Quit" button to return to chapter selection.
+1. Navigate to `/flashcards`.
+2. Select a chapter from the dropdown menu.
+3. Click "Start" to begin reviewing flashcards.
+4. Navigate through flashcards using the "Previous" and "Next" buttons.
+5. View your progress through the flashcards.
+6. Use the "Quit" button to return to chapter selection.
+7. Use the "Back to Main Menu" button to return to the main menu.
 
 ## Contributing
 
