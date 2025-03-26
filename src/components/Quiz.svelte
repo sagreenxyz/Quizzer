@@ -17,6 +17,7 @@
     let questions = [];
     let isChapterSelectionMode = true;
     let isLastQuestionAnswered = false;
+    let selectedChapterName = ''; // Add a variable to store the chapter name or number
 
     async function loadQuestions() {
         try {
@@ -44,6 +45,10 @@
 
         totalQuestions = filteredQuestions.length;
         questions = [...filteredQuestions];
+
+        // Set the chapter name or number for display
+        selectedChapterName = selectedChapter ? `Chapter ${selectedChapter}` : 'All Chapters';
+
         loadQuestion();
     }
 
@@ -237,6 +242,9 @@
         />
     {:else}
         <div>
+            <!-- Add a heading to display the selected chapter -->
+            <h2>{selectedChapterName}</h2>
+
             <p><strong>Score:</strong> {score}/{totalQuestionsAnswered} ({calculatePercentage()}%)</p>
 
             <ProgressBar
