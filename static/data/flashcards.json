@@ -1,0 +1,17 @@
+[
+    {
+        "question": "What is the capital of France?",
+        "answer": "Paris",
+        "chapters_id": 1
+    },
+    {
+        "question": "What is 2 + 2?",
+        "answer": "4",
+        "chapters_id": 1
+    },
+    {
+        "question": "What is the largest planet in our solar system?",
+        "answer": "Jupiter",
+        "chapters_id": 2
+    }
+]
