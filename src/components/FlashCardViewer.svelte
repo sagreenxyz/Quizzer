@@ -24,13 +24,18 @@
 =======
 
     let flashcards = [];
+    let filteredFlashcards = [];
     let currentIndex = 0;
+    let chapters = [];
+    let selectedChapter = null;
+    let selectedChapterName = ''; // Store the selected chapter name
+    let isChapterSelectionMode = true; // Add a mode for chapter selection
 
     async function loadFlashcards() {
         try {
-            const response = await fetch('/data/flashcards.json');
+            const response = await fetch('/api/flashcards');
             if (!response.ok) {
-                throw new Error(`Failed to fetch flashcards.json: ${response.status} ${response.statusText}`);
+                throw new Error(`Failed to fetch flashcards: ${response.status} ${response.statusText}`);
             }
             flashcards = await response.json();
 >>>>>>> 04e987a (Added flashcards)
@@ -69,7 +74,7 @@
         currentIndex = 0; // Reset the current index
 =======
     function nextFlashcard() {
-        currentIndex = (currentIndex + 1) % flashcards.length;
+        currentIndex = (currentIndex + 1) % filteredFlashcards.length;
     }
 
     function previousFlashcard() {
