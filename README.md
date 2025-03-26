@@ -1,6 +1,6 @@
-# AIQuizzer2
+# AIQuizzer
 
-AIQuizzer2 is a SvelteKit-based application that provides a Quiz and Flashcard system.
+AIQuizzer is a SvelteKit-based application that provides a Quiz and Flashcard system.
 
 ## Features
 
