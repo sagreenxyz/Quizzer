@@ -21,9 +21,9 @@
 
     async function loadQuestions() {
         try {
-            const response = await fetch('/data/questions.json');
+            const response = await fetch('/api/questions');
             if (!response.ok) {
-                throw new Error(`Failed to fetch questions.json: ${response.status} ${response.statusText}`);
+                throw new Error(`Failed to fetch questions: ${response.status} ${response.statusText}`);
             }
             questions = await response.json();
             chapters = [...new Set(questions.map(q => parseInt(q.chapters_id)).filter(chapter => !isNaN(chapter)))];
@@ -109,6 +109,16 @@
         totalQuestions = 0;
         isLastQuestionAnswered = false;
         isChapterSelectionMode = true;
+    }
+
+    function quitQuiz() {
+        isChapterSelectionMode = true; // Return to chapter selection mode
+        selectedChapter = null; // Reset the selected chapter
+        selectedChapterName = ''; // Clear the chapter name
+        questions = []; // Clear the questions
+        totalQuestionsAnswered = 0; // Reset progress
+        score = 0; // Reset score
+        isReviewMode = false; // Exit review mode if active
     }
 
     onMount(() => {
@@ -223,6 +233,25 @@
         background-color: #dc3545; /* Red for incorrect answer */
         color: white;
     }
+
+    .quit-container {
+        margin-top: 16px;
+    }
+
+    .quit-container button {
+        padding: 10px 15px;
+        font-size: 1rem;
+        border: none;
+        border-radius: 5px;
+        background-color: #dc3545; /* Red for quit button */
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .quit-container button:hover {
+        background-color: #a71d2a;
+    }
 </style>
 
 <div>
@@ -231,6 +260,7 @@
             {chapters}
             bind:selectedChapter
             startQuiz={startQuiz}
+            title="Select a Chapter to Start the Quiz"
         />
     {:else if isReviewMode}
         <ReviewAnswers
@@ -290,6 +320,11 @@
             {:else}
                 <p>Loading question...</p>
             {/if}
+
+            <!-- Quit button -->
+            <div class="quit-container">
+                <button on:click={quitQuiz}>Quit</button>
+            </div>
         </div>
     {/if}
 </div>
